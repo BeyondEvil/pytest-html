@@ -3,15 +3,15 @@ class ImageViewer {
         this.assets = assets
         this.active = 0
     }
-    nextActive () {
+    nextActive() {
         this.active = this.active === (this.assets.length - 1 ) ? 0 : this.active + 1
         return [this.active, this.activeImage]
     }
-    prevActive () {
+    prevActive() {
         this.active = this.active === 0 ? this.assets.length - 1 : this.active -1 
         return [this.active, this.activeImage]
     }
-    
+
     get imageIndex () {
         return this.active
     }
@@ -23,13 +23,13 @@ class ImageViewer {
 
 const setupImgViewer = (resultBody, assets) => {
     const imgViewer = new ImageViewer(assets)
-    
+
     const leftArrow = resultBody.querySelector('.image-container__nav--left')
     const rightArrow = resultBody.querySelector('.image-container__nav--right')
     const imgContainer = resultBody.querySelector('.image-container__frame')
     const imageName = resultBody.querySelector('.image-name')
     const counter = resultBody.querySelector('.image-overview')
-    
+
     const imgel = document.createElement('img')
     imgContainer.appendChild(imgel)
 
@@ -39,7 +39,7 @@ const setupImgViewer = (resultBody, assets) => {
         counter.innerText = `${index + 1} / ${assets.length}`
     }
     setImg(imgViewer.activeImage, 0)
-    
+
     const moveLeft = () => {
         const [index, image] = imgViewer.prevActive()
         setImg(image, index)

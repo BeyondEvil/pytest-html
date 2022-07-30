@@ -1,5 +1,5 @@
 class DataManager {
-    setManager(data){
+    setManager(data) {
         this.data = { ...data }
         this.renderData = { ...data }
     }
@@ -31,5 +31,5 @@ class DataManager {
 }
 
 module.exports = {
-    manager: new DataManager()
+    manager: new DataManager(),
 }
