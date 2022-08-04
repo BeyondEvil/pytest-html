@@ -119,7 +119,7 @@ span.xpassed,
   height: inherit;
 }
 
-div.image {
+div.media {
   border: 1px solid #e6e6e6;
   float: right;
   height: 240px;
@@ -127,19 +127,20 @@ div.image {
   overflow: hidden;
   width: 320px;
 }
-.image-container {
+
+.media-container {
   display: flex;
   align-items: center;
   flex: 1 1;
   overflow: hidden;
   height: 200px;
 }
-.image-container video {
+.media-container video {
   width: 100%;
 }
 
-.image-container__nav--right,
-.image-container__nav--left {
+.media-container__nav--right,
+.media-container__nav--left {
   flex: 0 0 25px;
   text-align: center;
   cursor: pointer;
@@ -151,8 +152,8 @@ div.image {
   text-align: center;
 }
 
-.image-name,
-.image-overview {
+.media__name,
+.media__counter {
   display: flex;
   flex-direction: row;
   justify-content: space-around;

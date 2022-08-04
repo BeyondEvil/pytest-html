@@ -1,36 +1,36 @@
-class ImageViewer {
+class MediaViewer {
     constructor(assets) {
         this.assets = assets
         this.active = 0
     }
     nextActive() {
-        this.active = this.active === (this.assets.length - 1 ) ? 0 : this.active + 1
-        return [this.active, this.activeImage]
+        this.active = this.active === this.assets.length - 1 ? 0 : this.active + 1
+        return [this.active, this.activeFile]
     }
     prevActive() {
         this.active = this.active === 0 ? this.assets.length - 1 : this.active -1
-        return [this.active, this.activeImage]
+        return [this.active, this.activeFile]
     }
 
     get imageIndex() {
         return this.active
     }
-    get activeImage() {
+    get activeFile() {
         return this.assets[this.active]
     }
 }
 
 
-const setupImgViewer = (resultBody, assets) => {
-    const imgViewer = new ImageViewer(assets)
-    const leftArrow = resultBody.querySelector('.image-container__nav--left')
-    const rightArrow = resultBody.querySelector('.image-container__nav--right')
-    const imageName = resultBody.querySelector('.image-name')
-    const counter = resultBody.querySelector('.image-overview')
+const setUp = (resultBody, assets) => {
+    const mediaViewer = new MediaViewer(assets)
+    const leftArrow = resultBody.querySelector('.media-container__nav--left')
+    const rightArrow = resultBody.querySelector('.media-container__nav--right')
+    const mediaName = resultBody.querySelector('.media__name')
+    const counter = resultBody.querySelector('.media__counter')
     const imageEl = resultBody.querySelector('img')
-    const imageElWrap = resultBody.querySelector('.image__screenshot')
+    const imageElWrap = resultBody.querySelector('.media__screenshot')
     const videoEl = resultBody.querySelector('source')
-    const videoElWrap = resultBody.querySelector('.image__video')
+    const videoElWrap = resultBody.querySelector('.media__video')
 
     const setImg = (image, index) => {
         if (image?.format_type === 'image') {
@@ -45,21 +45,21 @@ const setupImgViewer = (resultBody, assets) => {
             imageElWrap.classList.add('hidden')
         }
 
-        imageName.innerText = image?.name
+        mediaName.innerText = image?.name
         counter.innerText = `${index + 1} / ${assets.length}`
     }
-    setImg(imgViewer.activeImage, 0)
+    setImg(mediaViewer.activeFile, 0)
 
     const moveLeft = () => {
-        const [index, image] = imgViewer.prevActive()
+        const [index, image] = mediaViewer.prevActive()
         setImg(image, index)
     }
     const doRight = () => {
-        const [index, image] = imgViewer.nextActive()
+        const [index, image] = mediaViewer.nextActive()
         setImg(image, index)
     }
     const openImg = () => {
-        window.open(imgViewer.activeImage.path, '_blank')
+        window.open(mediaViewer.activeFile.path, '_blank')
     }
 
     leftArrow.addEventListener('click', moveLeft)
@@ -67,4 +67,4 @@ const setupImgViewer = (resultBody, assets) => {
     imageEl.addEventListener('click', openImg)
 }
 
-exports.setupImgViewer = setupImgViewer
+exports.setUp = setUp

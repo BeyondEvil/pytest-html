@@ -1,5 +1,5 @@
 const { formatDuration } = require('./utils.js')
-const imgViewer = require('./imgViewer.js')
+const mediaViewer = require('./mediaViewer.js')
 const templateEnvRow = document.querySelector('#template_environment_row')
 const templateResult = document.querySelector('#template_results-table__tbody')
 const aTag = document.querySelector('#template_a')
@@ -91,7 +91,7 @@ const dom = {
                 images.push({ path: content, name, format_type })
             }
         })
-        imgViewer.setupImgViewer(resultBody, images)
+        mediaViewer.setUp(resultBody, images)
 
         // Add custom html from the pytest_html_results_table_row hook
         resultsTableRow && insertAdditionalHTML(resultsTableRow, resultBody, 'td')
