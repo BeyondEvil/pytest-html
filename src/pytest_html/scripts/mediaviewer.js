@@ -22,6 +22,11 @@ class MediaViewer {
 
 
 const setUp = (resultBody, assets) => {
+    if (!assets.length) {
+        resultBody.querySelector('.media').classList.add('hidden')
+        return
+    }
+
     const mediaViewer = new MediaViewer(assets)
     const leftArrow = resultBody.querySelector('.media-container__nav--left')
     const rightArrow = resultBody.querySelector('.media-container__nav--right')
