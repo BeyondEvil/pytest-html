@@ -28,21 +28,20 @@ const setUp = (resultBody, assets) => {
     const mediaName = resultBody.querySelector('.media__name')
     const counter = resultBody.querySelector('.media__counter')
     const imageEl = resultBody.querySelector('img')
-    const imageElWrap = resultBody.querySelector('.media__screenshot')
-    const videoEl = resultBody.querySelector('source')
-    const videoElWrap = resultBody.querySelector('.media__video')
+    const sourceEl = resultBody.querySelector('source')
+    const videoEl = resultBody.querySelector('video')
 
     const setImg = (image, index) => {
         if (image?.format_type === 'image') {
             imageEl.src = image.path
 
-            imageElWrap.classList.remove('hidden')
-            videoElWrap.classList.add('hidden')
+            imageEl.classList.remove('hidden')
+            videoEl.classList.add('hidden')
         } else if (image?.format_type === 'video') {
-            videoEl.src = image.path
+            sourceEl.src = image.path
 
-            videoElWrap.classList.remove('hidden')
-            imageElWrap.classList.add('hidden')
+            videoEl.classList.remove('hidden')
+            imageEl.classList.add('hidden')
         }
 
         mediaName.innerText = image?.name
