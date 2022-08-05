@@ -77,7 +77,7 @@ const dom = {
         } else {
             resultBody.querySelector('.extras-row').classList.add('hidden')
         }
-        const images = []
+        const media = []
         extras?.forEach(({ name, format_type, content }) => {
             const extraLink = aTag.content.cloneNode(true)
             const extraLinkItem = extraLink.querySelector('a')
@@ -88,10 +88,10 @@ const dom = {
             resultBody.querySelector('.col-links').appendChild(extraLinkItem)
 
             if (['image', 'video'].includes(format_type)) {
-                images.push({ path: content, name, format_type })
+                media.push({ path: content, name, format_type })
             }
         })
-        mediaViewer.setUp(resultBody, images)
+        mediaViewer.setUp(resultBody, media)
 
         // Add custom html from the pytest_html_results_table_row hook
         resultsTableRow && insertAdditionalHTML(resultsTableRow, resultBody, 'td')

@@ -127,12 +127,6 @@ div.media {
   overflow: hidden;
   width: 320px;
 }
-div.media img,
-div.media video {
-  object-fit: cover;
-  width: 100%;
-  max-height: 100%;
-}
 
 .media-container {
   display: grid;
@@ -149,10 +143,16 @@ div.media video {
   cursor: pointer;
 }
 
-.image-container__frame {
+.media-container__viewport {
   cursor: pointer;
   text-align: center;
   height: inherit;
+}
+.media-container__viewport img,
+.media-container__viewport video {
+  object-fit: cover;
+  width: 100%;
+  max-height: 100%;
 }
 
 .media__name,

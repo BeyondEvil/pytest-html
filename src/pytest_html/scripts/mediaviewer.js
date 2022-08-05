@@ -1,22 +1,22 @@
 class MediaViewer {
     constructor(assets) {
         this.assets = assets
-        this.active = 0
+        this.index = 0
     }
     nextActive() {
-        this.active = this.active === this.assets.length - 1 ? 0 : this.active + 1
-        return [this.active, this.activeFile]
+        this.index = this.index === this.assets.length - 1 ? 0 : this.index + 1
+        return [this.activeFile, this.index]
     }
     prevActive() {
-        this.active = this.active === 0 ? this.assets.length - 1 : this.active -1
-        return [this.active, this.activeFile]
+        this.index = this.index === 0 ? this.assets.length - 1 : this.index -1
+        return [this.activeFile, this.index]
     }
 
-    get imageIndex() {
-        return this.active
+    get currentIndex() {
+        return this.index
     }
     get activeFile() {
-        return this.assets[this.active]
+        return this.assets[this.index]
     }
 }
 
@@ -31,31 +31,31 @@ const setUp = (resultBody, assets) => {
     const sourceEl = resultBody.querySelector('source')
     const videoEl = resultBody.querySelector('video')
 
-    const setImg = (image, index) => {
-        if (image?.format_type === 'image') {
-            imageEl.src = image.path
+    const setImg = (media, index) => {
+        if (media?.format_type === 'image') {
+            imageEl.src = media.path
 
             imageEl.classList.remove('hidden')
             videoEl.classList.add('hidden')
-        } else if (image?.format_type === 'video') {
-            sourceEl.src = image.path
+        } else if (media?.format_type === 'video') {
+            sourceEl.src = media.path
 
             videoEl.classList.remove('hidden')
             imageEl.classList.add('hidden')
         }
 
-        mediaName.innerText = image?.name
+        mediaName.innerText = media?.name
         counter.innerText = `${index + 1} / ${assets.length}`
     }
-    setImg(mediaViewer.activeFile, 0)
+    setImg(mediaViewer.activeFile, mediaViewer.currentIndex)
 
     const moveLeft = () => {
-        const [index, image] = mediaViewer.prevActive()
-        setImg(image, index)
+        const [media, index] = mediaViewer.prevActive()
+        setImg(media, index)
     }
     const doRight = () => {
-        const [index, image] = mediaViewer.nextActive()
-        setImg(image, index)
+        const [media, index] = mediaViewer.nextActive()
+        setImg(media, index)
     }
     const openImg = () => {
         window.open(mediaViewer.activeFile.path, '_blank')

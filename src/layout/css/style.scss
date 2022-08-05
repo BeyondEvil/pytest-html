@@ -147,12 +147,6 @@ div.media {
   margin: 0 $spacing;
   overflow: hidden;
   width: $extra-media-width;
-  img,
-  video {
-    object-fit: cover;
-    width: 100%;
-    max-height: 100%;
-  }
 }
 
 .media-container {
@@ -169,10 +163,16 @@ div.media {
   cursor: pointer;
 }
 
-.image-container__frame {
+.media-container__viewport {
   cursor: pointer;
   text-align: center;
   height: inherit;
+  img,
+  video {
+    object-fit: cover;
+    width: 100%;
+    max-height: 100%;
+  }
 }
 
 .media__name,
