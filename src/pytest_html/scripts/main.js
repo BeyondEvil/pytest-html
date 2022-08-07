@@ -11,17 +11,17 @@ const removeChildren = (node) => {
     }
 }
 
-const getOutcome = ({ nodeid, wasxfail }, tests) => {
-    const relatedOutcome = tests
-        .filter((test) => test.nodeid === nodeid)
-        .map(({ outcome }) => outcome)
-    if (relatedOutcome.includes('failed')) {
+const getOutcome = ({ nodeid, wasxfail, outcome }) => {
+    switch (outcome) {
+    case 'rerun':
+        return 'Rerun'
+    case 'failed':
         return typeof wasxfail === 'undefined' ? 'Failed' : 'XPassed'
-    } else if (relatedOutcome.includes('error')) {
+    case 'error':
         return 'Error'
-    } else if (relatedOutcome.includes('skipped')) {
+    case 'skipped':
         return typeof wasxfail === 'undefined' ? 'Skipped' : 'XFailed'
-    } else {
+    default:
         return typeof wasxfail === 'undefined' ? 'Passed' : 'XPassed'
     }
 }
@@ -43,9 +43,7 @@ const renderStatic = () => {
 const renderContent = (tests) => {
     const renderSet = tests.filter(({ when }) => when === 'call')
 
-    const rows = renderSet.map((test) =>
-        dom.getResultTBody(test, getOutcome(test, tests))
-    )
+    const rows = renderSet.map((test) => dom.getResultTBody(test, getOutcome(test)))
 
     const table = document.querySelector('#results-table')
     removeChildren(table)
