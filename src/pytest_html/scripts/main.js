@@ -41,7 +41,7 @@ const renderStatic = () => {
 }
 
 const renderContent = (tests) => {
-    const renderSet = tests.filter(({ when }) => when === 'call')
+    const renderSet = tests.filter(({ when, outcome }) => when === 'call' || outcome === 'error')
 
     const rows = renderSet.map((test) => dom.getResultTBody(test, getOutcome(test)))
 
