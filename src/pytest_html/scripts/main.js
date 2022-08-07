@@ -91,16 +91,16 @@ const renderDerived = (tests, collectedItems) => {
         input.disabled = !count
         input.checked = !currentFilter.includes(outcome)
     })
-
-    if (collectedItems === renderSet.length) {
+    const numberOfTests = [...new Set(renderSet.map(({nodeid}) => nodeid))].length
+    if (collectedItems === numberOfTests) {
         const accTime = tests.reduce((prev, { duration }) => prev + duration, 0)
         const formattedAccTime = formatDuration(accTime)
-        const testWord = renderSet.length > 1 ? 'tests' : 'test'
-        const innerText = `${renderSet.length} ${testWord} ran in ${formattedAccTime} seconds.`
+        const testWord = numberOfTests > 1 ? 'tests' : 'test'
+        const innerText = `${numberOfTests} ${testWord} ran in ${formattedAccTime} seconds.`
         document.querySelector('.run-count').innerText = innerText
         document.querySelector('.summary__reload__button').classList.add('hidden')
     } else {
-        document.querySelector('.run-count').innerText = `${renderSet.length} / ${collectedItems} tests done`
+        document.querySelector('.run-count').innerText = `${numberOfTests} / ${collectedItems} tests done`
     }
 }
 
