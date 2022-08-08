@@ -30,6 +30,9 @@ class DataManager {
     get durationFormat() {
         return this.renderData.durationFormat
     }
+    get runningState() {
+      return this.renderData.runningState
+    }
 }
 
 module.exports = {
