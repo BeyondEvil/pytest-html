@@ -26,7 +26,7 @@ const renderStatic = () => {
 }
 
 const renderContent = (tests) => {
-    const renderSet = tests.filter(({ when, outcome }) => when === 'call' || outcome === "Error" )
+    const renderSet = tests.filter(({ when, outcome }) => when === 'call' || outcome === 'Error' )
 
     const rows = renderSet.map((test) =>
       dom.getResultTBody(test)
@@ -48,7 +48,7 @@ const renderContent = (tests) => {
     })
 }
 
-const renderDerived = (tests, collectedItems, runningState) => {
+const renderDerived = (tests, collectedItems, isFinished) => {
     const renderSet = tests.filter(({ when, outcome }) => when === 'call' || outcome === 'Error')
 
     const possibleOutcomes = [
@@ -72,9 +72,9 @@ const renderDerived = (tests, collectedItems, runningState) => {
     })
 
     const numberOfTests = renderSet.filter(({outcome}) =>
-      ["Passed", "Failed", "XPassed", "XFailed"].includes(outcome)
+      ['Passed', 'Failed', 'XPassed', 'XFailed'].includes(outcome)
     ).length
-    if (runningState === "Finished") {
+    if (isFinished) {
         const accTime = tests.reduce((prev, { duration }) => prev + duration, 0)
         const formattedAccTime = formatDuration(accTime)
         const testWord = numberOfTests > 1 ? 'tests' : 'test'
@@ -108,14 +108,11 @@ const bindEvents = () => {
 }
 
 const renderPage = () => {
-    const filteredTests = manager.testSubset
-    const allTests = manager.allTests
-    const collectedItems = manager.collectedItems
-    const runningState = manager.runningState
+    const { testSubset, allTests, collectedItems, isFinished } = manager
 
     renderStatic()
-    renderContent(filteredTests)
-    renderDerived(allTests, collectedItems, runningState)
+    renderContent(testSubset)
+    renderDerived(allTests, collectedItems, isFinished)
 }
 
 const redraw = () => {

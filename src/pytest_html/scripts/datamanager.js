@@ -30,8 +30,8 @@ class DataManager {
     get durationFormat() {
         return this.renderData.durationFormat
     }
-    get runningState() {
-      return this.renderData.runningState
+    get isFinished() {
+      return this.data.runningState === 'Finished'
     }
 }
 
