@@ -105,7 +105,7 @@ const bindEvents = () => {
         })
     })
     document.querySelector('#show_all_details').addEventListener('click', () => {
-        manager.allCollapsed= false
+        manager.allCollapsed = false
         redraw()
     })
     document.querySelector('#hide_all_details').addEventListener('click', () => {
