@@ -109,7 +109,7 @@ const bindEvents = () => {
         redraw()
     })
     document.querySelector('#hide_all_details').addEventListener('click', () => {
-        manager.allCollapsed= true
+        manager.allCollapsed = true
         redraw()
     })
 }
