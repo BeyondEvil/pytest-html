@@ -1,3 +1,4 @@
+const storageModule = require('./storage.js')
 const { formatDuration } = require('./utils.js')
 const mediaViewer = require('./mediaViewer.js')
 const templateEnvRow = document.querySelector('#template_environment_row')
@@ -48,8 +49,8 @@ const dom = {
     },
     getListHeader: ({ resultsTableHeader }) => {
         const header = listHeader.content.cloneNode(true)
-        const sortAttr = localStorage.getItem('sort')
-        const sortAsc = JSON.parse(localStorage.getItem('sortAsc'))
+        const sortAttr = storageModule.getSort()
+        const sortAsc = JSON.parse(storageModule.getSortDirection())
         const sortables = ['outcome', 'nodeid', 'duration']
 
         sortables.forEach((sortCol) => {

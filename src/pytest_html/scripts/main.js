@@ -3,7 +3,7 @@ const { dom, findAll } = require('./dom.js')
 const { manager } = require('./datamanager.js')
 const { doSort } = require('./sort.js')
 const { doFilter } = require('./filter.js')
-const { getFilter } = require('./localstorage_utils.js')
+const { getFilter } = require('./storage.js')
 
 const removeChildren = (node) => {
     while (node.firstChild) {

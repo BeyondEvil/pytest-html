@@ -3,12 +3,12 @@ const sinon = require('sinon')
 const { doInitFilter, doFilter } = require('../src/pytest_html/scripts/filter.js')
 const { doInitSort, doSort } = require('../src/pytest_html/scripts/sort.js')
 const dataModule = require('../src/pytest_html/scripts/datamanager.js')
-const localStorageModule = require('../src/pytest_html/scripts/localstorage_utils.js')
-
+const storageModule = require('../src/pytest_html/scripts/storage.js')
 
 
 describe('Filter tests', () => {
-    let getFilterMock, managerSpy
+    let getFilterMock
+    let managerSpy
     before(() => {
         const jsonDatan = {
             "tests": 
@@ -41,7 +41,7 @@ describe('Filter tests', () => {
 
 
         it("has no stored filters", () => {
-            getFilterMock = sinon.stub(localStorageModule, 'getFilter').returns([])
+            getFilterMock = sinon.stub(storageModule, 'getFilter').returns([])
             managerSpy = sinon.spy(dataModule.manager, 'setRender')
 
             doInitFilter()
@@ -49,7 +49,7 @@ describe('Filter tests', () => {
             expect(dataModule.manager.testSubset.map(({outcome}) => outcome)).to.eql([ 'passed', 'failed', 'passed', 'passed', 'passed', 'passed' ])
         })
         it("exclude passed", () => {
-            getFilterMock = sinon.stub(localStorageModule, 'getFilter').returns(['passed'])
+            getFilterMock = sinon.stub(storageModule, 'getFilter').returns(['passed'])
             managerSpy = sinon.spy(dataModule.manager, 'setRender')
 
             doInitFilter()
@@ -61,8 +61,8 @@ describe('Filter tests', () => {
         var setFilterMock
         afterEach(() => setFilterMock.restore())
         it("removes a filter", () => {
-            getFilterMock = sinon.stub(localStorageModule, 'getFilter').returns(['passed'])
-            setFilterMock = sinon.stub(localStorageModule, 'setFilter')
+            getFilterMock = sinon.stub(storageModule, 'getFilter').returns(['passed'])
+            setFilterMock = sinon.stub(storageModule, 'setFilter')
             managerSpy = sinon.spy(dataModule.manager, 'setRender')
 
             doFilter('passed', true)
@@ -70,8 +70,8 @@ describe('Filter tests', () => {
             expect(dataModule.manager.testSubset.map(({outcome}) => outcome)).to.eql([ 'passed', 'failed', 'passed', 'passed', 'passed', 'passed' ])
         })
         it("applies a filter", () => {
-            getFilterMock = sinon.stub(localStorageModule, 'getFilter').returns([])
-            setFilterMock = sinon.stub(localStorageModule, 'setFilter')
+            getFilterMock = sinon.stub(storageModule, 'getFilter').returns([])
+            setFilterMock = sinon.stub(storageModule, 'setFilter')
             managerSpy = sinon.spy(dataModule.manager, 'setRender')
 
             doFilter('passed', false)
@@ -116,8 +116,8 @@ describe('Sort tests', () => {
 
         afterEach(() => [sortMock,sortDirectionMock,managerSpy].forEach(fn => fn.restore()))
         it("has no stored sort", () => {
-            sortMock = sinon.stub(localStorageModule, 'getSort').returns(null)
-            sortDirectionMock = sinon.stub(localStorageModule, 'getSortDirection').returns(null)
+            sortMock = sinon.stub(storageModule, 'getSort').returns(null)
+            sortDirectionMock = sinon.stub(storageModule, 'getSortDirection').returns(null)
             managerSpy = sinon.spy(dataModule.manager, 'setRender')
 
             doInitSort()
@@ -125,8 +125,8 @@ describe('Sort tests', () => {
             expect(dataModule.manager.testSubset.map(({outcome}) => outcome)).to.eql([ 'passed', 'failed', 'passed', 'passed', 'passed', 'passed' ])
         })
         it("has stored sort preference", () => {
-            sortMock = sinon.stub(localStorageModule, 'getSort').returns('outcome')
-            sortDirectionMock = sinon.stub(localStorageModule, 'getSortDirection').returns(false)
+            sortMock = sinon.stub(storageModule, 'getSort').returns('outcome')
+            sortDirectionMock = sinon.stub(storageModule, 'getSortDirection').returns(false)
             managerSpy = sinon.spy(dataModule.manager, 'setRender')
 
             doInitSort()
@@ -139,10 +139,10 @@ describe('Sort tests', () => {
 
         afterEach(() => [getSortMock, setSortMock, getSortDirectionMock, setSortDirection, managerSpy].forEach(fn => fn.restore()))
         it("sort on outcome", () => {
-            getSortMock = sinon.stub(localStorageModule, 'getSort').returns(null)
-            setSortMock = sinon.stub(localStorageModule, 'setSort')
-            getSortDirectionMock = sinon.stub(localStorageModule, 'getSortDirection').returns(null)
-            setSortDirection = sinon.stub(localStorageModule, 'setSortDirection')
+            getSortMock = sinon.stub(storageModule, 'getSort').returns(null)
+            setSortMock = sinon.stub(storageModule, 'setSort')
+            getSortDirectionMock = sinon.stub(storageModule, 'getSortDirection').returns(null)
+            setSortDirection = sinon.stub(storageModule, 'setSortDirection')
             managerSpy = sinon.spy(dataModule.manager, 'setRender')
 
             doSort('outcome')
