@@ -45,6 +45,14 @@ const renderContent = (tests) => {
     table.querySelectorAll('.extra').forEach((item) => {
         item.colSpan = document.querySelectorAll('th').length
     })
+    findAll('.sortable').forEach((elem) => {
+        elem.addEventListener('click', (evt) => {
+            const { target: element } = evt
+            const { columnType } = element.dataset
+            doSort(columnType)
+            redraw()
+        })
+    })
 }
 
 const renderDerived = (tests, collectedItems, isFinished) => {
@@ -86,13 +94,6 @@ const renderDerived = (tests, collectedItems, isFinished) => {
 }
 
 const bindEvents = () => {
-    const sortColumn = (evt) => {
-        const { target: element } = evt
-        const { columnType } = element.dataset
-
-        doSort(columnType)
-        redraw()
-    }
     const filterColumn = (evt) => {
         const { target: element } = evt
         const { testResult } = element.dataset
@@ -100,10 +101,6 @@ const bindEvents = () => {
         doFilter(testResult, element.checked)
         redraw()
     }
-    findAll('.sortable').forEach((elem) => {
-        elem.removeEventListener('click', sortColumn)
-        elem.addEventListener('click', sortColumn)
-    })
     findAll('input[name="filter_checkbox"]').forEach((elem) => {
         elem.removeEventListener('click', filterColumn)
         elem.addEventListener('click', filterColumn)
