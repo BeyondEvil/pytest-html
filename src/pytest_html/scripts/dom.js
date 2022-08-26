@@ -96,7 +96,7 @@ const dom = {
             }
 
             if (format_type === 'html') {
-              resultBody.querySelector('.extraHTML').insertAdjacentHTML('beforeend', `<div>${content}</div>`)
+                resultBody.querySelector('.extraHTML').insertAdjacentHTML('beforeend', `<div>${content}</div>`)
             }
         })
         mediaViewer.setUp(resultBody, media)

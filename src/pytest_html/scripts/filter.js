@@ -15,14 +15,13 @@ const doFilter = (type, apply) => {
     if (!apply) {
         currentFilter.push(type)
     } else {
-        const index = currentFilter.indexOf(type);
+        const index = currentFilter.indexOf(type)
         if (index > -1) {
             currentFilter.splice(index, 1)
         }
     }
 
     storageModule.setFilter(currentFilter)
-
     if (currentFilter.length) {
         const filteredSubset = getFilteredSubSet(currentFilter)
         manager.setRender(filteredSubset)

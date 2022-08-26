@@ -14,7 +14,7 @@ class DataManager {
     }
 
     set allCollapsed(collapsed) {
-        this.renderData = { ...this.data, tests: [...this.data.tests.map((test) => (
+        this.renderData = { ...this.renderData, tests: [...this.renderData.tests.map((test) => (
             { ...test, collapsed }
         ))] }
     }

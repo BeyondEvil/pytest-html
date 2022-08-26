@@ -86,23 +86,27 @@ const renderDerived = (tests, collectedItems, isFinished) => {
 }
 
 const bindEvents = () => {
-    findAll('.sortable').forEach((elem) => {
-        elem.addEventListener('click', (evt) => {
-            const { target: element } = evt
-            const { columnType } = element.dataset
+    const sortColumn = (evt) => {
+        const { target: element } = evt
+        const { columnType } = element.dataset
 
-            doSort(columnType)
-            redraw()
-        })
+        doSort(columnType)
+        redraw()
+    }
+    const filterColumn = (evt) => {
+        const { target: element } = evt
+        const { testResult } = element.dataset
+
+        doFilter(testResult, element.checked)
+        redraw()
+    }
+    findAll('.sortable').forEach((elem) => {
+        elem.removeEventListener('click', sortColumn)
+        elem.addEventListener('click', sortColumn)
     })
     findAll('input[name="filter_checkbox"]').forEach((elem) => {
-        elem.addEventListener('click', (evt) => {
-            const { target: element } = evt
-            const { testResult } = element.dataset
-
-            doFilter(testResult, element.checked)
-            redraw()
-        })
+        elem.removeEventListener('click', filterColumn)
+        elem.addEventListener('click', filterColumn)
     })
     document.querySelector('#show_all_details').addEventListener('click', () => {
         manager.allCollapsed = false
@@ -114,7 +118,7 @@ const bindEvents = () => {
     })
 }
 
-const renderPage = () => {
+const redraw = () => {
     const { testSubset, allTests, collectedItems, isFinished } = manager
 
     renderStatic()
@@ -122,11 +126,5 @@ const renderPage = () => {
     renderDerived(allTests, collectedItems, isFinished)
 }
 
-const redraw = () => {
-    setTimeout(() => {
-        renderPage()
-        bindEvents()
-    }, 0)
-}
-
 exports.redraw = redraw
+exports.bindEvents = bindEvents
