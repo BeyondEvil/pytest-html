@@ -37,7 +37,7 @@ const renderContent = (tests) => {
     if (!rows.length) {
         tableHeader.appendChild(dom.getListHeaderEmpty())
     }
-
+    table.appendChild(dom.getColGroup())
     table.appendChild(tableHeader)
 
     rows.forEach((row) => !!row && table.appendChild(row))
@@ -50,6 +50,12 @@ const renderContent = (tests) => {
             const { target: element } = evt
             const { columnType } = element.dataset
             doSort(columnType)
+            redraw()
+        })
+    })
+    findAll('.col-result').forEach((elem) => {
+        elem.addEventListener('click', ({ target }) => {
+            manager.toggleCollapsedItem(target.dataset.id)
             redraw()
         })
     })

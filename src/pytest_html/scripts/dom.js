@@ -2,6 +2,7 @@ const storageModule = require('./storage.js')
 const { formatDuration } = require('./utils.js')
 const mediaViewer = require('./mediaViewer.js')
 const templateEnvRow = document.querySelector('#template_environment_row')
+const templateCollGroup = document.querySelector('#template_table-colgroup')
 const templateResult = document.querySelector('#template_results-table__tbody')
 const aTag = document.querySelector('#template_a')
 const listHeader = document.querySelector('#template_results-table__head')
@@ -65,11 +66,14 @@ const dom = {
         return header
     },
     getListHeaderEmpty: () => listHeaderEmpty.content.cloneNode(true),
-    getResultTBody: ({ nodeid, longreprtext, duration, extras, resultsTableRow, tableHtml, outcome, collapsed }) => {
+    getColGroup: () => templateCollGroup.content.cloneNode(true),
+    getResultTBody: ({ nodeid, id, longreprtext, duration, extras, resultsTableRow, tableHtml, outcome, collapsed }) => {
         const outcomeLower = outcome.toLowerCase()
         const resultBody = templateResult.content.cloneNode(true)
         resultBody.querySelector('tbody').classList.add(outcomeLower)
         resultBody.querySelector('.col-result').innerText = outcome
+        resultBody.querySelector('.col-result').classList.add(`${collapsed ? 'expander' : 'collapser'}`)
+        resultBody.querySelector('.col-result').dataset.id = id
         resultBody.querySelector('.col-name').innerText = nodeid
         resultBody.querySelector('.col-duration').innerText = `${formatDuration(duration)}s`
 
