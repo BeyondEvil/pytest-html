@@ -48,6 +48,12 @@ const setSort = (type) => {
     history.pushState({}, null, unescape(url.href))
 }
 
+const getCollapsedCategory = () => {
+    const url = new URL(window.location.href)
+    const collapsedItems = new URLSearchParams(url.search).get('collapsed')
+    return collapsedItems?.split(',') || []
+}
+
 const getSortDirection = () => JSON.parse(sessionStorage.getItem('sortAsc'))
 
 const setSortDirection = (ascending) => sessionStorage.setItem('sortAsc', ascending)
@@ -61,4 +67,5 @@ module.exports = {
     getSortDirection,
     setSort,
     setSortDirection,
+    getCollapsedCategory,
 }
