@@ -87,13 +87,15 @@ const dom = {
 
         const media = []
         extras?.forEach(({ name, format_type, content }) => {
-            const extraLink = aTag.content.cloneNode(true)
-            const extraLinkItem = extraLink.querySelector('a')
+            if (['json', 'text', 'url'].includes(format_type)) {
+                const extraLink = aTag.content.cloneNode(true)
+                const extraLinkItem = extraLink.querySelector('a')
 
-            extraLinkItem.href = content
-            extraLinkItem.className = `col-links__extra ${format_type}`
-            extraLinkItem.innerText = name
-            resultBody.querySelector('.col-links').appendChild(extraLinkItem)
+                extraLinkItem.href = content
+                extraLinkItem.className = `col-links__extra ${format_type}`
+                extraLinkItem.innerText = name
+                resultBody.querySelector('.col-links').appendChild(extraLinkItem)
+            }
 
             if (['image', 'video'].includes(format_type)) {
                 media.push({ path: content, name, format_type })

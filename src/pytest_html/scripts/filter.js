@@ -16,6 +16,7 @@ const doFilter = (type, show) => {
     } else {
         storageModule.hideCategory(type)
     }
+
     const currentFilter = storageModule.getVisible()
 
     if (currentFilter.length) {
