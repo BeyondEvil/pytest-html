@@ -79,9 +79,11 @@ const dom = {
 
 
         if (longreprtext) {
-            resultBody.querySelector('.log').innerText = longreprtext
+            // resultBody.querySelector('.log').innerText = longreprtext
+            resultBody.querySelector('.log').innerHTML = longreprtext
         }
-        if (collapsed || !longreprtext) {
+        // if (collapsed || !longreprtext) {
+        if (collapsed) {
             resultBody.querySelector('.extras-row').classList.add('hidden')
         }
 

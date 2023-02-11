@@ -14,57 +14,66 @@ jobs:
             name: py36-ubuntu
             python-version: 3.6
 
-          - os: windows-latest
-            name: py36-windows
-            python-version: 3.6
+#          https://github.com/pytest-dev/pytest-html/issues/585
+#          - os: windows-latest
+#            name: py36-windows
+#            python-version: 3.6
 
-          - os: macOS-latest
-            name: py36-mac
-            python-version: 3.6
+#          https://github.com/pytest-dev/pytest-html/issues/585
+#          - os: macOS-latest
+#            name: py36-mac
+#            python-version: 3.6
 
           - os: ubuntu-latest
             name: py37-ubuntu
             python-version: 3.7
 
-          - os: windows-latest
-            name: py37-windows
-            python-version: 3.7
+#          https://github.com/pytest-dev/pytest-html/issues/585
+#          - os: windows-latest
+#            name: py37-windows
+#            python-version: 3.7
 
-          - os: macOS-latest
-            name: py37-mac
-            python-version: 3.7
+#          https://github.com/pytest-dev/pytest-html/issues/585
+#          - os: macOS-latest
+#            name: py37-mac
+#            python-version: 3.7
 
           - os: ubuntu-latest
             name: py38-ubuntu
             python-version: 3.8
 
-          - os: windows-latest
-            name: py38-windows
-            python-version: 3.8
+#          https://github.com/pytest-dev/pytest-html/issues/585
+#          - os: windows-latest
+#            name: py38-windows
+#            python-version: 3.8
 
-          - os: macOS-latest
-            name: py38-mac
-            python-version: 3.8
+#          https://github.com/pytest-dev/pytest-html/issues/585
+#          - os: macOS-latest
+#            name: py38-mac
+#            python-version: 3.8
 
           - os: ubuntu-latest
             name: py39-ubuntu
             python-version: 3.9
 
-          - os: windows-latest
-            name: py39-windows
-            python-version: 3.9
+#          https://github.com/pytest-dev/pytest-html/issues/585
+#          - os: windows-latest
+#            name: py39-windows
+#            python-version: 3.9
 
-          - os: macOS-latest
-            name: py39-mac
-            python-version: 3.9
+#          https://github.com/pytest-dev/pytest-html/issues/585
+#          - os: macOS-latest
+#            name: py39-mac
+#            python-version: 3.9
 
           - os: ubuntu-latest
             name: pypy3-ubuntu
             python-version: pypy3
 
-          - os: windows-latest
-            name: pypy3-windows
-            python-version: pypy3
+#          https://github.com/pytest-dev/pytest-html/issues/585
+#          - os: windows-latest
+#            name: pypy3-windows
+#            python-version: pypy3
 
            # https://github.com/pytest-dev/pytest-html/issues/482
 #          - os: macOS-latest
@@ -117,8 +126,8 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: '16.x'
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
       - name: QUnit Tests
         run: npm test
