@@ -266,8 +266,8 @@ class NextGenReport(BaseReport):
 
     @property
     def css(self):
-        print("woot", Path(self._assets_path.name, "style.css"))
-        print("waat", self._css_path.relative_to(self._report_path.parent))
+        # print("woot", Path(self._assets_path.name, "style.css"))
+        # print("waat", self._css_path.relative_to(self._report_path.parent))
         return Path(self._assets_path.name, "style.css")
 
     def _data_content(self, content, asset_name, *args, **kwargs):
